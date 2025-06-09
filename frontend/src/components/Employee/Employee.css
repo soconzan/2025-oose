@@ -1,0 +1,81 @@
+.employee-list-container {
+  padding: 20px;
+  font-family: sans-serif;
+}
+
+.employee-list-container h2 {
+  margin-bottom: 16px;
+  font-size: 24px;
+}
+
+.filters {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.filters select {
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.search-box {
+  position: relative;
+  flex: 1;
+}
+
+.search-box input {
+  width: 100%;
+  padding: 8px 36px 8px 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.search-box .icon {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #888;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 16px;
+}
+
+thead {
+  border-bottom: 2px solid #333;
+}
+
+th,
+td {
+  text-align: left;
+  padding: 12px 8px;
+  border-bottom: 1px solid #eee;
+}
+
+.pagination {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+}
+
+.pagination button {
+  padding: 6px 12px;
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+.pagination button.active {
+  font-weight: bold;
+  border-bottom: 2px solid #333;
+}
+
+.pagination button:disabled {
+  color: #ccc;
+  cursor: default;
+}
