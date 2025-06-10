@@ -22,4 +22,4 @@ class EmployeeDAO:
         return self.db.query(Employee).offset(skip).limit(limit).all()
 
     def get_employee(self, emp_num: int) -> Optional[Employee]:
-        return self.db.query(Employee).filter(Employee.employeeId == emp_id).first()
+        return self.db.query(Employee).filter(Employee.employeeNum == emp_num).first()

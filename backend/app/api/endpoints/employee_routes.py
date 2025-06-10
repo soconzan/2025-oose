@@ -45,13 +45,13 @@ def read_employees(skip: int = 0, limit: int = 100,
     return employee_service.get_employee_list(skip=skip, limit=limit)
 
 
-@router.get("/{emp_id}", response_model=EmployeeResponse)
-def read_employee(emp_num: int,
+@router.get("/{id}", response_model=EmployeeResponse)
+def read_employee(id: int,
                   employee_service: EmployeeService = Depends(get_employee_service)):
     """
     직원 상세 조회
     """
-    emp = employee_service.get_employee(emp_num)
+    emp = employee_service.get_employee(id)
     if not emp:
-        raise HTTPException(status_code=404, detail=f"Employee not found : {emp_num}")
+        raise HTTPException(status_code=404, detail=f"Employee not found : {id}")
     return emp
