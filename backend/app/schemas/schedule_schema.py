@@ -9,7 +9,7 @@ class ScheduleCreate(BaseModel):
     endDate: datetime = Field(..., description="종료 일시")
     sharingScope: int = Field(..., description="공유 범위 (예: 0 - 비공개, 1 - 부서 내 공유, 2 - 전체 공유)")
     smsAlertTime: Optional[datetime] = Field(None, description="SMS 알림 시간 (선택 사항)")
-    smsAlertTarget: Optional[int] = Field(None, description="SMS 알림 대상 (선택 사항, 0 - 부서 내, 1 - 전체체)")
+    smsAlertTarget: Optional[int] = Field(None, description="SMS 알림 대상 (선택 사항, 0 - 부서 내, 1 - 전체)")
 
     model_config = ConfigDict(
         json_schema_extra={
