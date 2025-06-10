@@ -1,17 +1,20 @@
 import React from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import MainPage from './pages/MainPage.jsx';
-import EmployeesPage from './pages/EmployeesPage.jsx';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 
-function App() {
+import NavBar from './components/NavBar';
+import EmployeePage from './pages/employee/EmployeesPage' ;
+import RegisterPage from './pages/employee/RegisterEmpPage';
+
+export default function App() {
   return (
     <BrowserRouter>
+      <NavBar />
+
       <Routes>
-        <Route path="/" element={<MainPage />} />
-        <Route path="/employees" element={<EmployeesPage />} />
+        <Route path="/employees" element={<EmployeePage />} />
+        <Route path="/employees/create" element={<RegisterPage />} />
+        <Route path="*" element={<Navigate to="/employees" replace />} />
       </Routes>
     </BrowserRouter>
   );
 }
-
-export default App;

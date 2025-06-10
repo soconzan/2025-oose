@@ -1,0 +1,175 @@
+/* 직원 조회회 */
+
+.employee-list-container {
+  padding: 20px;
+  font-family: sans-serif;
+}
+
+.employee-list-container h2 {
+  margin-bottom: 16px;
+  font-size: 24px;
+}
+
+.filters {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.filters select {
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.search-box {
+  position: relative;
+  flex: 1;
+}
+
+.search-box input {
+  width: 100%;
+  padding: 8px 36px 8px 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.search-box .icon {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #888;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 16px;
+}
+
+thead {
+  border-bottom: 2px solid #333;
+}
+
+th,
+td {
+  text-align: left;
+  padding: 12px 8px;
+  border-bottom: 1px solid #eee;
+}
+
+.pagination {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+}
+
+.pagination button {
+  padding: 6px 12px;
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+.pagination button.active {
+  font-weight: bold;
+  border-bottom: 2px solid #333;
+}
+
+.pagination button:disabled {
+  color: #ccc;
+  cursor: default;
+}
+
+/* 직원 등록 */
+
+.register-form {
+  max-width: 450px;
+  margin: 40px auto;
+  padding: 24px;
+  border: 1px solid #eee;
+  border-radius: 8px;
+  font-family: sans-serif;
+}
+
+.register-form h2 {
+  margin-bottom: 24px;
+  font-size: 22px;
+}
+
+.field {
+  display: flex;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.field label {
+  width: 80px;
+  font-size: 14px;
+}
+
+.field input,
+.field select {
+  flex: 1;
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.email-field {
+  display: flex;
+  align-items: center;
+}
+
+.email-field .at {
+  margin: 0 6px;
+  font-size: 16px;
+}
+
+.email-field .domain {
+  width: 180px;
+}
+
+.phone-field input {
+  width: 60px;
+  text-align: center;
+}
+
+.phone-field span {
+  margin: 0 4px;
+}
+
+.radio-field {
+  align-items: center;
+}
+
+.radio-field label {
+  margin-right: 12px;
+}
+
+.buttons {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 24px;
+}
+
+.buttons .cancel {
+  padding: 8px 16px;
+  border: 1px solid #333;
+  background: #fff;
+  cursor: pointer;
+}
+
+.buttons .submit {
+  padding: 8px 16px;
+  border: none;
+  background: #333;
+  color: #fff;
+  cursor: pointer;
+}
+
+email-field > input {
+  width: 100;
+}
