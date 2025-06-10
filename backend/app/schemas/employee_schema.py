@@ -8,7 +8,7 @@ class EmployeeCreate(BaseModel):
     employeeNum: int = Field(..., ge=1, description="사번")
     name: str = Field(..., min_length=1, max_length=10, description="이름")
     email: EmailStr = Field(..., max_length=32, description="이메일 (honggildong@moef.go.kr)")
-    phone: str = Field(..., min_length=9, max_length=11, description="연락처 (예: 010-1234-5678)")
+    phone: str = Field(..., min_length=9, max_length=20, description="연락처 (예: 010-1234-5678)")
     departmentId: int = Field(..., ge=1, description="부서 ID")
     position: str = Field(..., min_length=1, max_length=20, description="직책 (예: 국장, 사무관 등)")
     userType: Literal["ADMIN", "USER"] = Field(..., description='유저 타입: "ADMIN" 또는 "USER"')

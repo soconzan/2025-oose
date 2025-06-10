@@ -1,3 +1,5 @@
+/* 직원 조회회 */
+
 .employee-list-container {
   padding: 20px;
   font-family: sans-serif;
@@ -78,4 +80,96 @@ td {
 .pagination button:disabled {
   color: #ccc;
   cursor: default;
+}
+
+/* 직원 등록 */
+
+.register-form {
+  max-width: 450px;
+  margin: 40px auto;
+  padding: 24px;
+  border: 1px solid #eee;
+  border-radius: 8px;
+  font-family: sans-serif;
+}
+
+.register-form h2 {
+  margin-bottom: 24px;
+  font-size: 22px;
+}
+
+.field {
+  display: flex;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.field label {
+  width: 80px;
+  font-size: 14px;
+}
+
+.field input,
+.field select {
+  flex: 1;
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.email-field {
+  display: flex;
+  align-items: center;
+}
+
+.email-field .at {
+  margin: 0 6px;
+  font-size: 16px;
+}
+
+.email-field .domain {
+  width: 180px;
+}
+
+.phone-field input {
+  width: 60px;
+  text-align: center;
+}
+
+.phone-field span {
+  margin: 0 4px;
+}
+
+.radio-field {
+  align-items: center;
+}
+
+.radio-field label {
+  margin-right: 12px;
+}
+
+.buttons {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 24px;
+}
+
+.buttons .cancel {
+  padding: 8px 16px;
+  border: 1px solid #333;
+  background: #fff;
+  cursor: pointer;
+}
+
+.buttons .submit {
+  padding: 8px 16px;
+  border: none;
+  background: #333;
+  color: #fff;
+  cursor: pointer;
+}
+
+email-field > input {
+  width: 100;
 }

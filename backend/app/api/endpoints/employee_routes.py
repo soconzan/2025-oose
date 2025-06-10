@@ -40,7 +40,7 @@ def register_employee(emp_in: EmployeeCreate,
 def read_employees(skip: int = 0, limit: int = 100,
                    employee_service: EmployeeService = Depends(get_employee_service)):
     """
-    직원 목록 조회 (페이징)
+    직원 목록 조회
     """
     return employee_service.get_employee_list(skip=skip, limit=limit)
 
