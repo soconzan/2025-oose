@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import '../../components/employee/Employee.css';
 
 const DEPT_MAP = {
@@ -11,6 +12,7 @@ const DEPT_MAP = {
 const DEPT_OPTIONS = Object.entries(DEPT_MAP).map(([id, name]) => ({ id, name }));
 
 export default function EmployeeList() {
+  const navigate = useNavigate();
   const [employees, setEmployees] = useState([]);
   const [filtered, setFiltered] = useState([]);
   const [filters, setFilters] = useState({ department: '', position: '', keyword: '' });
@@ -85,16 +87,20 @@ export default function EmployeeList() {
           </tr>
         </thead>
         <tbody>
-          {filtered.map(emp => (
-            <tr key={emp.employeeId}>
-              <td>{emp.employeeNum}</td>
-              <td>{emp.name}</td>
-              <td>{DEPT_MAP[emp.departmentId] || emp.departmentId}</td>
-              <td>{emp.position}</td>
-              <td>{emp.userType}</td>
-            </tr>
-          ))}
-        </tbody>
+        {filtered.map(emp => (
+          <tr
+            key={emp.employeeId}
+            onClick={() => navigate(`/employees/${emp.employeeNum}`)}
+            style={{ cursor: 'pointer' }}
+          >
+            <td>{emp.employeeNum}</td>
+            <td>{emp.name}</td>
+            <td>{DEPT_MAP[emp.departmentId] || emp.departmentId}</td>
+            <td>{emp.position}</td>
+            <td>{emp.userType}</td>
+          </tr>
+        ))}
+      </tbody>
       </table>
 
       <div className="pagination">

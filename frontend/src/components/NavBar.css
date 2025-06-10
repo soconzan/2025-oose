@@ -2,7 +2,6 @@
   background: #fff;
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
   padding: 0 1rem;
-  width: 100%;             /* 전체 너비 사용 */
 }
 
 .nav-list {
