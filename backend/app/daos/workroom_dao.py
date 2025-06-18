@@ -1,6 +1,6 @@
 from sqlalchemy.orm import Session
-from ..models.workroom_model import Workroom
-from ..schemas.workroom_schema import WorkroomCreate, WorkroomUpdate
+from app.models.workroom_model import Workroom
+from app.schemas.workroom_schema import WorkroomUpdate
 
 class WorkroomDAO:
     def __init__(self, db: Session):
@@ -22,7 +22,7 @@ class WorkroomDAO:
         db_workroom = self.get_workroom(workroom_id)
         if db_workroom is None:
             return None
-        for key, value in workroom_data.dict(exclude_unset=True).items():
+        for key, value in workroom_data.dict(exclude_unset=True, by_alias=True).items():
             setattr(db_workroom, key, value)
         self.db.commit()
         self.db.refresh(db_workroom)
@@ -33,4 +33,32 @@ class WorkroomDAO:
         if db_workroom:
             self.db.delete(db_workroom)
             self.db.commit()
+        return db_workroom
+
+    def set_unit_worker(self, workroom_id: int, assignee: str):
+        db_workroom = self.get_workroom(workroom_id)
+        if not db_workroom:
+            return None
+        db_workroom.assignee = assignee
+        self.db.commit()
+        self.db.refresh(db_workroom)
+        return db_workroom
+
+    def set_period(self, workroom_id: int, start_date, end_date):
+        db_workroom = self.get_workroom(workroom_id)
+        if not db_workroom:
+            return None
+        db_workroom.start_date = start_date
+        db_workroom.end_date = end_date
+        self.db.commit()
+        self.db.refresh(db_workroom)
+        return db_workroom
+
+    def set_public(self, workroom_id: int, is_public: bool):
+        db_workroom = self.get_workroom(workroom_id)
+        if not db_workroom:
+            return None
+        db_workroom.is_public = is_public
+        self.db.commit()
+        self.db.refresh(db_workroom)
         return db_workroom
