@@ -3,57 +3,38 @@
 from pydantic import BaseModel, Field, ConfigDict
 from typing import Optional
 from datetime import datetime
+from .employee_schema import EmployeeResponse  # 작성자 정보를 위해 추가
 
+
+# --- DocumentCreate ---
 class DocumentCreate(BaseModel):
-    """
-    DTO for creating a new Document.
-    """
-    title: str = Field(..., max_length=200, description="문서 제목")
-    category: str = Field(..., max_length=100, description="문서 분류")
-    content: str = Field(..., description="문서 본문 내용")
-    fileUrl: Optional[str] = Field(None, description="첨부 파일 URL (선택)")
-
-    model_config = ConfigDict(
-        json_schema_extra={
-            "example": {
-                "title": "내부 보고서_2025",
-                "category": "정책자료",
-                "content": "2025년 상반기 정책 분석 보고서 내용...",
-                "fileUrl": "https://example.com/docs/2025/report.pdf"
-            }
-        }
-    )
+    title: str = Field(..., max_length=200)
+    category: str = Field(..., max_length=100)
+    content: str = Field(...)
+    file_url: Optional[str] = Field(None)
+    author_id: int = Field(..., description="작성자 사원 ID")  # 작성자 ID 필드 추가
 
 
+# --- DocumentUpdate ---
 class DocumentUpdate(BaseModel):
-    """
-    DTO for updating an existing Document.
-    """
-    title: Optional[str] = Field(None, max_length=200, description="문서 제목")
-    category: Optional[str] = Field(None, max_length=100, description="문서 분류")
-    content: Optional[str] = Field(None, description="문서 본문 내용")
-    fileUrl: Optional[str] = Field(None, description="첨부 파일 URL (선택)")
-
-    model_config = ConfigDict(
-        json_schema_extra={
-            "example": {
-                "title": "내부 보고서_2025_v2",
-                "content": "수정된 보고서 내용..."
-            }
-        }
-    )
+    title: Optional[str] = Field(None, max_length=200)
+    category: Optional[str] = Field(None, max_length=100)
+    content: Optional[str] = Field(None)
+    file_url: Optional[str] = Field(None)
 
 
+# --- DocumentResponse ---
 class DocumentResponse(BaseModel):
-    """
-    DTO for returning Document data to clients.
-    """
-    documentID: str = Field(..., description="문서 고유 ID")
-    title: str = Field(..., description="문서 제목")
-    category: str = Field(..., description="문서 분류")
-    content: str = Field(..., description="문서 본문 내용")
-    fileUrl: Optional[str] = Field(None, description="첨부 파일 URL")
-    createdDate: datetime = Field(..., description="등록 일시")
-    updatedDate: datetime = Field(..., description="수정 일시")
+    id: int
+    title: str
+    category: str
+    content: str
+    file_url: Optional[str] = None
+    created_date: datetime
+    updated_date: datetime
 
+    # author 필드에 EmployeeResponse 스키마를 사용하여 작성자 정보를 포함
+    author: Optional[EmployeeResponse] = None
+
+    # Pydantic v2 스타일로 orm_mode 설정
     model_config = ConfigDict(from_attributes=True)
