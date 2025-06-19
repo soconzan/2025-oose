@@ -121,7 +121,7 @@ return (
 
         <div className="buttons">
             <button type="button" className="cancel" onClick={onCancel}>취소</button>
-            <button type="submit" className="submit">등록</button>
+            <button type="submit" className="submit" onClick={onSubmit}>등록</button>
         </div>
     </form>
 );
