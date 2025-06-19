@@ -22,7 +22,7 @@ export default function MainPage() {
           <p className="text-xl font-medium">일정</p>
         </Link>
         <Link
-          to="/workspaces"
+          to="/workspace"
           className="bg-white shadow rounded-lg p-6 text-center hover:bg-gray-50 transition">
           <p className="text-xl font-medium">업무방</p>
         </Link>

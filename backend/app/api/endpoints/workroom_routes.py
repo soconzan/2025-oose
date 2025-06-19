@@ -1,12 +1,11 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
-from ...core.database import get_db
+from app.core.dependencies import get_db_session as get_db
 from ...schemas.workroom_schema import WorkroomCreate, WorkroomUpdate, WorkroomOut
 from ...services import workroom_service
 
 router = APIRouter(
-    prefix="/workrooms",
-    tags=["Workrooms"]
+    tags=["Workrooms"] 
 )
 
 @router.post("/", response_model=WorkroomOut)
