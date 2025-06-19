@@ -214,7 +214,7 @@ export default function SchedulePage() {
             <option key={opt.value} value={opt.value}>{opt.label}</option>
           ))}
         </select>
-        <select
+        {/* <select
           value={filters.alarmTarget}
           onChange={e => setFilters({ ...filters, alarmTarget: e.target.value })}>
           <option value="">알림 대상</option>
@@ -228,7 +228,7 @@ export default function SchedulePage() {
           value={filters.keyword}
           onChange={e => setFilters({ ...filters, keyword: e.target.value })}
         />
-        <button onClick={() => setShowRegister(true)}>일정 등록</button>
+        <button onClick={() => setShowRegister(true)}>일정 등록</button> */}
       </div>
 
       {/* 뷰 모드에 따른 렌더링 */}
