@@ -44,21 +44,21 @@ class WorkroomDAO:
         self.db.refresh(db_workroom)
         return db_workroom
 
-    def set_period(self, workroom_id: int, start_date, end_date):
+    def set_period(self, workroom_id: int, startDate, endDate):
         db_workroom = self.get_workroom(workroom_id)
         if not db_workroom:
             return None
-        db_workroom.start_date = start_date
-        db_workroom.end_date = end_date
+        db_workroom.startDate = startDate
+        db_workroom.endDate = endDate
         self.db.commit()
         self.db.refresh(db_workroom)
         return db_workroom
 
-    def set_public(self, workroom_id: int, is_public: bool):
+    def set_public(self, workroom_id: int, isPublic: bool):
         db_workroom = self.get_workroom(workroom_id)
         if not db_workroom:
             return None
-        db_workroom.is_public = is_public
+        db_workroom.isPublic = isPublic
         self.db.commit()
         self.db.refresh(db_workroom)
         return db_workroom

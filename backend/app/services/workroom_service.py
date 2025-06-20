@@ -28,10 +28,10 @@ def set_unit_worker(db: Session, work_id: int, assignee: str):
     dao = WorkroomDAO(db)
     return dao.set_unit_worker(work_id, assignee)
 
-def set_period(db: Session, work_id: int, start_date, end_date):
+def set_period(db: Session, work_id: int, startDate, endDate):
     dao = WorkroomDAO(db)
-    return dao.set_period(work_id, start_date, end_date)
+    return dao.set_period(work_id, startDate, endDate)
 
-def set_public(db: Session, work_id: int, is_public: bool):
+def set_public(db: Session, work_id: int, isPublic: bool):
     dao = WorkroomDAO(db)
-    return dao.set_public(work_id, is_public)
+    return dao.set_public(work_id, isPublic)

@@ -62,12 +62,12 @@ function WorkroomAdmin() {
           {workrooms.map(w => (
             <tr key={w.id}>
               <td>{w.id}</td>
-              <td>{w.work_title}</td>
+              <td>{w.workTitle}</td>
               <td>{w.category}</td>
               <td>{w.assignee}</td>
-              <td>{w.start_date} ~ {w.end_date}</td>
-              <td>{w.work_content}</td>
-              <td>{w.is_public ? '공개' : '비공개'}</td>
+              <td>{w.startDate} ~ {w.endDate}</td>
+              <td>{w.workContent}</td>
+              <td>{w.isPublic ? '공개' : '비공개'}</td>
               <td>
                 <button onClick={() => handleEdit(w)}>수정</button>
               </td>

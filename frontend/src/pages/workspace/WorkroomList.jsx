@@ -20,7 +20,7 @@ function WorkroomList() {
   }, []);
 
   const filtered = workrooms.filter(w =>
-    w.work_title && w.work_title.toLowerCase().includes(search.toLowerCase())
+    w.workTitle && w.workTitle.toLowerCase().includes(search.toLowerCase())
   );
 
   return (
@@ -51,11 +51,11 @@ function WorkroomList() {
           ) : (
             filtered.map(w => (
               <tr key={w.id}>
-                <td>{w.work_title}</td>
+                <td>{w.workTitle}</td>
                 <td>{w.category}</td>
                 <td>{w.assignee}</td>
-                <td>{w.start_date} ~ {w.end_date}</td>
-                <td>{w.is_public ? w.work_content : '비공개'}</td>
+                <td>{w.startDate} ~ {w.endDate}</td>
+                <td>{w.isPublic ? w.workContent : '비공개'}</td>
               </tr>
             ))
           )}

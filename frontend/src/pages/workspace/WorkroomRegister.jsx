@@ -3,13 +3,13 @@ import { useNavigate } from 'react-router-dom';
 
 function WorkroomRegister() {
   const [form, setForm] = useState({
-    work_title: '',
+    workTitle: '',
     category: '',
     assignee: '',
-    work_content: '',
-    is_public: true,
-    start_date: '',
-    end_date: '',
+    workContent: '',
+    isPublic: true,
+    startDate: '',
+    endDate: '',
   });
   const navigate = useNavigate();
 
@@ -32,13 +32,13 @@ function WorkroomRegister() {
       if (res.ok) {
         alert('등록 성공!');
         setForm({
-          work_title: '',
+          workTitle: '',
           category: '',
           assignee: '',
-          work_content: '',
-          is_public: true,
-          start_date: '',
-          end_date: '',
+          workContent: '',
+          isPublic: true,
+          startDate: '',
+          endDate: '',
         });
         navigate('/workspace/list');
       } else {
@@ -56,7 +56,7 @@ function WorkroomRegister() {
       <form onSubmit={handleSubmit}>
         <div>
           <label>업무명</label><br />
-          <input name="work_title" value={form.work_title} onChange={handleChange} required />
+          <input name="workTitle" value={form.workTitle} onChange={handleChange} required />
         </div>
         <div>
           <label>카테고리</label><br />
@@ -68,32 +68,32 @@ function WorkroomRegister() {
         </div>
         <div>
           <label>업무 내용</label><br />
-          <textarea name="work_content" value={form.work_content} onChange={handleChange} />
+          <textarea name="workContent" value={form.workContent} onChange={handleChange} />
         </div>
         <div>
           <label>업무공개여부</label>
-          <input type="radio" name="is_public" value="public" checked={form.is_public === true} onChange={handleChange} /> 공개
-          <input type="radio" name="is_public" value="private" checked={form.is_public === false} onChange={handleChange} /> 비공개
+          <input type="radio" name="isPublic" value="public" checked={form.isPublic === true} onChange={handleChange} /> 공개
+          <input type="radio" name="isPublic" value="private" checked={form.isPublic === false} onChange={handleChange} /> 비공개
         </div>
         <div>
           <label>시작일</label><br />
-          <input name="start_date" type="date" value={form.start_date} onChange={handleChange} required />
+          <input name="startDate" type="date" value={form.startDate} onChange={handleChange} required />
         </div>
         <div>
           <label>종료일</label><br />
-          <input name="end_date" type="date" value={form.end_date} onChange={handleChange} required />
+          <input name="endDate" type="date" value={form.endDate} onChange={handleChange} required />
         </div>
         <div style={{ marginTop: 10 }}>
           <button type="submit" style={{ marginRight: 10 }}>등록</button>
           <button type="button" onClick={() =>
             setForm({
-              work_title: '',
+              workTitle: '',
               category: '',
               assignee: '',
-              work_content: '',
-              is_public: true,
-              start_date: '',
-              end_date: '',
+              workContent: '',
+              isPublic: true,
+              startDate: '',
+              endDate: '',
             })
           }>취소</button>
           <button type="button" onClick={() => navigate('/workspace')} style={{ marginLeft: 10 }}>

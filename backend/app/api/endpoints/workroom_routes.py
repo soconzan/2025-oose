@@ -42,9 +42,9 @@ def set_unit_worker(workroom_id: int, assignee: str, db: Session = Depends(get_d
     return workroom_service.set_unit_worker(db, workroom_id, assignee)
 
 @router.put("/{workroom_id}/period")
-def set_period(workroom_id: int, start_date: str, end_date: str, db: Session = Depends(get_db)):
-    return workroom_service.set_period(db, workroom_id, start_date, end_date)
+def set_period(workroom_id: int, startDate: str, endDate: str, db: Session = Depends(get_db)):
+    return workroom_service.set_period(db, workroom_id, startDate, endDate)
 
 @router.put("/{workroom_id}/public")
-def set_public(workroom_id: int, is_public: bool, db: Session = Depends(get_db)):
-    return workroom_service.set_public(db, workroom_id, is_public)
+def set_public(workroom_id: int, isPublic: bool, db: Session = Depends(get_db)):
+    return workroom_service.set_public(db, workroom_id, isPublic)

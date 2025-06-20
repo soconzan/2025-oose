@@ -2,13 +2,13 @@ import React, { useState } from 'react';
 
 function WorkroomEditForm({ workroom, onDone }) {
   const [form, setForm] = useState({
-    work_title: workroom.work_title || '',
+    workTitle: workroom.workTitle || '',
     category: workroom.category || '',
     assignee: workroom.assignee || '',
-    work_content: workroom.work_content || '',
-    is_public: workroom.is_public,
-    start_date: workroom.start_date || '',
-    end_date: workroom.end_date || '',
+    workContent: workroom.workContent || '',
+    isPublic: workroom.isPublic,
+    startDate: workroom.startDate || '',
+    endDate: workroom.endDate || '',
   });
   const [saving, setSaving] = useState(false);
 
@@ -17,7 +17,7 @@ function WorkroomEditForm({ workroom, onDone }) {
     setForm(prev => ({
         ...prev,
         [name]:
-        name === 'is_public'
+        name === 'isPublic'
             ? value === 'public'
             : value,
     }));
@@ -50,7 +50,7 @@ function WorkroomEditForm({ workroom, onDone }) {
       <form onSubmit={handleSubmit}>
         <div>
           <label>업무명</label><br />
-          <input name="work_title" value={form.work_title} onChange={handleChange} required />
+          <input name="workTitle" value={form.workTitle} onChange={handleChange} required />
         </div>
         <div>
           <label>카테고리</label><br />
@@ -62,20 +62,20 @@ function WorkroomEditForm({ workroom, onDone }) {
         </div>
         <div>
           <label>업무 내용</label><br />
-          <textarea name="work_content" value={form.work_content} onChange={handleChange} />
+          <textarea name="workContent" value={form.workContent} onChange={handleChange} />
         </div>
         <div>
           <label>업무공개여부</label>
-          <input type="radio" name="is_public" value="public" checked={form.is_public === true} onChange={handleChange} /> 공개
-          <input type="radio" name="is_public" value="private" checked={form.is_public === false} onChange={handleChange} /> 비공개
+          <input type="radio" name="isPublic" value="public" checked={form.isPublic === true} onChange={handleChange} /> 공개
+          <input type="radio" name="isPublic" value="private" checked={form.isPublic === false} onChange={handleChange} /> 비공개
         </div>
         <div>
           <label>시작일</label><br />
-          <input name="start_date" type="date" value={form.start_date} onChange={handleChange} required />
+          <input name="startDate" type="date" value={form.startDate} onChange={handleChange} required />
         </div>
         <div>
           <label>종료일</label><br />
-          <input name="end_date" type="date" value={form.end_date} onChange={handleChange} required />
+          <input name="endDate" type="date" value={form.endDate} onChange={handleChange} required />
         </div>
         <div style={{ marginTop: 10 }}>
           <button type="submit" disabled={saving} style={{ marginRight: 10 }}>수정완료</button>
