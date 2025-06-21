@@ -1,6 +1,7 @@
 import secrets
+from typing import List, Optional
 from sqlalchemy.orm import Session
-from app.models.employee import Employee
+from ..models.employee_model import Employee
 
 
 class EmployeeDAO:
@@ -16,9 +17,9 @@ class EmployeeDAO:
         self.db.commit()
         self.db.refresh(emp)
         return emp
-
-    def get_employee(self, emp_id: str) -> Employee | None:
-        return self.db.query(Employee).filter(Employee.employeeId == emp_id).first()
-
-    def get_employees(self, skip: int = 0, limit: int = 100) -> list[Employee]:
+    
+    def get_employees(self, skip: int = 0, limit: int = 100) -> List[Employee]:
         return self.db.query(Employee).offset(skip).limit(limit).all()
+
+    def get_employee(self, emp_num: int) -> Optional[Employee]:
+        return self.db.query(Employee).filter(Employee.employeeNum == emp_num).first()

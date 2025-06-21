@@ -1,0 +1,360 @@
+/* 기존 스타일에 추가할 달력 관련 CSS */
+
+/* 뷰 모드 선택 */
+.view-mode-selector {
+  margin-bottom: 20px;
+  display: flex;
+  gap: 20px;
+}
+
+.view-mode-selector label {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.view-mode-selector input[type="radio"] {
+  margin: 0;
+}
+
+/* 달력과 목록을 나란히 배치 */
+.calendar-and-list {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+}
+
+/* 달력 컨테이너 */
+.calendar-container {
+  flex: 1;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 15px;
+  background: white;
+}
+
+.calendar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.calendar-header button {
+  background: #f0f0f0;
+  border: 1px solid #ccc;
+  padding: 5px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.calendar-header button:hover {
+  background: #e0e0e0;
+}
+
+.calendar-header h3 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+/* 요일 헤더 */
+.calendar-weekdays {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 1px;
+  margin-bottom: 5px;
+}
+
+.weekday {
+  text-align: center;
+  font-weight: 600;
+  padding: 8px;
+  background: #f8f9fa;
+  border: 1px solid #e9ecef;
+}
+
+/* 달력 그리드 */
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 1px;
+  border: 1px solid #e9ecef;
+}
+
+.calendar-day {
+  min-height: 80px;
+  border: 1px solid #e9ecef;
+  padding: 5px;
+  background: white;
+  position: relative;
+}
+
+.calendar-day.empty {
+  background: #f8f9fa;
+}
+
+.day-number {
+  font-weight: 500;
+  margin-bottom: 3px;
+}
+
+.schedule-indicator {
+  font-size: 11px;
+}
+
+.schedule-item {
+  background: #007bff;
+  color: white;
+  padding: 1px 4px;
+  margin-bottom: 1px;
+  border-radius: 2px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.more-schedules {
+  color: #666;
+  font-size: 10px;
+  text-align: center;
+  margin-top: 2px;
+}
+
+/* 오른쪽 일정 목록 */
+.schedule-list-view {
+  flex: 1;
+  max-height: 600px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 15px;
+  background: #f8f9fa;
+}
+
+.date-group {
+  margin-bottom: 20px;
+}
+
+.date-header {
+  background: #e9ecef;
+  padding: 8px 12px;
+  margin: 0 0 10px 0;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #495057;
+}
+
+.schedule-list-item {
+  background: white;
+  padding: 10px;
+  margin-bottom: 5px;
+  border-radius: 4px;
+  border: 1px solid #dee2e6;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.schedule-list-item:hover {
+  background: #f8f9fa;
+}
+
+.schedule-title {
+  font-weight: 500;
+  color: #495057;
+}
+
+/* 반응형 디자인 */
+@media (max-width: 768px) {
+  .calendar-and-list {
+    flex-direction: column;
+  }
+  
+  .calendar-day {
+    min-height: 60px;
+  }
+  
+  .view-mode-selector {
+    flex-direction: column;
+    gap: 10px;
+  }
+}
+
+/* 직원 조회회 */
+
+.employee-list-container {
+  padding: 20px;
+  font-family: sans-serif;
+}
+
+.employee-list-container h2 {
+  margin-bottom: 16px;
+  font-size: 24px;
+}
+
+.filters {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.filters select {
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.search-box {
+  position: relative;
+  flex: 1;
+}
+
+.search-box input {
+  width: 100%;
+  padding: 8px 36px 8px 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.search-box .icon {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #888;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 16px;
+}
+
+thead {
+  border-bottom: 2px solid #333;
+}
+
+th,
+td {
+  text-align: left;
+  padding: 12px 8px;
+  border-bottom: 1px solid #eee;
+}
+
+.pagination {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+}
+
+.pagination button {
+  padding: 6px 12px;
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+.pagination button.active {
+  font-weight: bold;
+  border-bottom: 2px solid #333;
+}
+
+.pagination button:disabled {
+  color: #ccc;
+  cursor: default;
+}
+
+/* 직원 등록 */
+
+.register-form {
+  max-width: 450px;
+  margin: 40px auto;
+  padding: 24px;
+  border: 1px solid #eee;
+  border-radius: 8px;
+  font-family: sans-serif;
+}
+
+.register-form h2 {
+  margin-bottom: 24px;
+  font-size: 22px;
+}
+
+.field {
+  display: flex;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.field label {
+  width: 80px;
+  font-size: 14px;
+}
+
+.field input,
+.field select {
+  flex: 1;
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.email-field {
+  display: flex;
+  align-items: center;
+}
+
+.email-field .at {
+  margin: 0 6px;
+  font-size: 16px;
+}
+
+.email-field .domain {
+  width: 180px;
+}
+
+.phone-field input {
+  width: 60px;
+  text-align: center;
+}
+
+.phone-field span {
+  margin: 0 4px;
+}
+
+.radio-field {
+  align-items: center;
+}
+
+.radio-field label {
+  margin-right: 12px;
+}
+
+.buttons {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 24px;
+}
+
+.buttons .cancel {
+  padding: 8px 16px;
+  border: 1px solid #333;
+  background: #fff;
+  cursor: pointer;
+}
+
+.buttons .submit {
+  padding: 8px 16px;
+  border: none;
+  background: #333;
+  color: #fff;
+  cursor: pointer;
+}
+
+email-field > input {
+  width: 100;
+}
