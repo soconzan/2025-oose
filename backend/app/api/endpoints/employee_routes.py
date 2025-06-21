@@ -7,13 +7,13 @@ from ...schemas.employee_schema import EmployeeCreate, EmployeeResponse
 from ...daos.employee_dao import EmployeeDAO
 from ...services.employee_service import EmployeeService
 
-router = APIRouter(prefix="/employees", tags=["employees"])
+router = APIRouter(tags=["employees"])
 
 def get_employee_service(db: Session = Depends(get_db_session)) -> EmployeeService:
     employee_dao = EmployeeDAO(db)
     return EmployeeService(employee_dao)
 
-@router.post("/", response_model=EmployeeResponse, status_code=201)
+@router.post("", response_model=EmployeeResponse, status_code=201)
 def register_employee(emp_in: EmployeeCreate,
                       emp_service : EmployeeService = Depends(get_employee_service)):
     """
@@ -35,15 +35,13 @@ def register_employee(emp_in: EmployeeCreate,
     # dto = EmployeeService.register(db, emp_in)
     # return dto
 
-
-@router.get("/", response_model=List[EmployeeResponse])
+@router.get("", response_model=List[EmployeeResponse])
 def read_employees(skip: int = 0, limit: int = 100,
                    employee_service: EmployeeService = Depends(get_employee_service)):
     """
     직원 목록 조회
     """
     return employee_service.get_employee_list(skip=skip, limit=limit)
-
 
 @router.get("/{id}", response_model=EmployeeResponse)
 def read_employee(id: int,

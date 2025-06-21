@@ -1,26 +1,33 @@
 # backend/app/daos/course_dao.py
 
 from sqlalchemy.orm import Session
+from sqlalchemy import select
 from typing import List, Optional
 from ..models.course_model import Course # Course ORM 모델 임포트
 from ..schemas.course_schema import CourseCreate, CourseUpdate # DTO 임포트 (타입 힌트용)
 
 class CourseDAO:
-    def __init__(self, db: Session):
-        self.db = db
+    def __init__(self, db_session: Session):
+        self.db = db_session
 
     # 1. 교육 과정 등록 (Create)
-    def create_course(self, course: Course) -> Course:
+    def create(self, course_data: CourseCreate) -> Course:
         """새로운 교육 과정을 데이터베이스에 추가합니다."""
-        self.db.add(course)
+        new_course = Course(**course_data.model_dump())
+        self.db.add(new_course)
         self.db.commit()
-        self.db.refresh(course) # DB에서 생성된 courseId 등 업데이트된 값을 객체에 반영
-        return course
+        self.db.refresh(new_course)
+        return new_course
 
     # 2. 교육 과정 목록 조회 (Read - All)
-    def get_all_courses(self, skip: int = 0, limit: int = 100) -> List[Course]:
+    def get_all(self, search: str, skip: int, limit: int) -> List[Course]:
         """모든 교육 과정을 조회합니다."""
-        return self.db.query(Course).offset(skip).limit(limit).all()
+        query = select(Course)
+        if search:
+            query = query.filter(Course.courseName.ilike(f"%{search}%"))
+        query = query.offset(skip).limit(limit)
+        result = self.db.execute(query)
+        return result.scalars().all()
 
     # 3. 교육 과정 상세 조회 (Read - By ID)
     def get_course_by_id(self, course_id: int) -> Optional[Course]:

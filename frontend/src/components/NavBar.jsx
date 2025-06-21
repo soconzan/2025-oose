@@ -8,7 +8,7 @@ export default function NavBar() {
     { name: '문서',      path: '/documents'  },
     { name: '일정',      path: '/schedules'  },
     { name: '업무방',    path: '/workspaces' },
-    { name: '교육',      path: '/educations' },
+    { name: '교육',      path: '/courses' },
   ];
 
   return (
@@ -18,8 +18,8 @@ export default function NavBar() {
           <li key={sec.name} className="nav-item">
             <Link to={sec.path} className="nav-link">{sec.name}</Link>
             <ul className="dropdown">
-              <li><Link to={`${sec.path}/create`} className="dropdown-link">등록</Link></li>
-              <li><Link to={sec.path}           className="dropdown-link">조회</Link></li>
+              <li><Link to={`${sec.path}/register`} className="dropdown-link">등록</Link></li>
+              <li><Link to={sec.path} className="dropdown-link">조회</Link></li>
             </ul>
           </li>
         ))}

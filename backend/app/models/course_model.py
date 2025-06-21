@@ -1,24 +1,25 @@
 # backend/app/models/course_model.py
-from sqlalchemy import Column, Integer, String, ForeignKey, DateTime, Boolean
+from sqlalchemy import Column, Integer, String, Text, Date, ForeignKey, DateTime, Boolean
 from sqlalchemy.orm import relationship, Mapped, mapped_column
 from sqlalchemy.sql import func # for default timestamps
 from ..core.database import Base # SQLAlchemy Base
 from .employee_model import Employee # Employee 모델 임포트 (외래 키 참조)
+from datetime import datetime # 추가
 
 class Course(Base):
     __tablename__ = "courses"
 
-    courseId: Mapped[int] = mapped_column(Integer, primary_key=True, autoincrement=True)
-    courseName: Mapped[str] = mapped_column(String(255), nullable=False)
-    category: Mapped[str] = mapped_column(String(100), nullable=False)
-    videoId: Mapped[int | None] = mapped_column(Integer, nullable=True) # None 허용
-    managerId: Mapped[int] = mapped_column(ForeignKey("employees.employeeNum"), nullable=False) # managerId는 employeeNum을 참조
-    courseStartDate: Mapped[datetime] = mapped_column(DateTime, nullable=False)
-    courseEndDate: Mapped[datetime] = mapped_column(DateTime, nullable=False)
-    applicationStartDate: Mapped[datetime] = mapped_column(DateTime, nullable=False)
-    applicationEndDate: Mapped[datetime] = mapped_column(DateTime, nullable=False)
-    courseCapacity: Mapped[int] = mapped_column(Integer, nullable=False)
-    currentApplicants: Mapped[int] = mapped_column(Integer, nullable=False, default=0) # 기본값 0
+    courseId = Column(Integer, primary_key=True, index=True, autoincrement=True)
+    courseName = Column(String(255), nullable=False)
+    category = Column(String(100), nullable=False)
+    videoId = Column(Integer, nullable=True)
+    courseStartDate = Column(DateTime, nullable=False)
+    courseEndDate = Column(DateTime, nullable=False)
+    applicationStartDate = Column(DateTime, nullable=False)
+    applicationEndDate = Column(DateTime, nullable=False)
+    courseCapacity = Column(Integer, nullable=False)
+    managerId: Mapped[int] = mapped_column(ForeignKey("employees.employeeNum"), nullable=False)
+    currentApplicants: Mapped[int] = mapped_column(Integer, nullable=False, default=0)
     courseTarget: Mapped[str] = mapped_column(String(255), nullable=False)
     coursePlace: Mapped[str] = mapped_column(String(255), nullable=False)
 

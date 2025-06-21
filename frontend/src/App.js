@@ -1,29 +1,29 @@
 import React from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-
-import NavBar from './components/NavBar';
-import EmployeePage from './pages/employee/EmployeesPage' ;
-import RegisterPage from './pages/employee/RegisterEmpPage';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import MainPage from './pages/MainPage';
+import EmployeesPage from './pages/employee/EmployeesPage';
+import RegisterEmpPage from './pages/employee/RegisterEmpPage';
 import EmployeeDetailPage from './pages/employee/EmployeeDetailPage';
+import CoursePage from './pages/course/CoursePage';
+import RegisterCoursePage from './pages/course/RegisterCoursePage';
+import NavBar from './components/NavBar';
 
-import SchedulePage from './pages/schedule/SchedulePage';
-import ScheduleDetailPage from './pages/schedule/ScheduleDetailPage';
-import RegisterScdPage from './pages/schedule/RegisterScdPage';
-
-export default function App() {
+function App() {
   return (
-    <BrowserRouter>
+    <Router>
       <NavBar />
-
-      <Routes>
-        <Route path="/employees" element={<EmployeePage />} />
-        <Route path="/employees/create" element={<RegisterPage />} />
-        <Route path="/employees/:id" element={<EmployeeDetailPage />} />
-
-        <Route path="/schedules" element={<SchedulePage />} />
-        <Route path="/schedules/:id" element={<ScheduleDetailPage />} />
-        <Route path="/schedules/create" element={<RegisterScdPage />} />
-      </Routes>
-    </BrowserRouter>
+      <div style={{ padding: '20px' }}>
+        <Routes>
+          <Route path="/" element={<MainPage />} />
+          <Route path="/employees" element={<EmployeesPage />} />
+          <Route path="/employees/register" element={<RegisterEmpPage />} />
+          <Route path="/employees/:employeeNum" element={<EmployeeDetailPage />} />
+          <Route path="/courses" element={<CoursePage />} />
+          <Route path="/courses/register" element={<RegisterCoursePage />} />
+        </Routes>
+      </div>
+    </Router>
   );
 }
+
+export default App;

@@ -6,7 +6,7 @@ from .config import settings
 # 데이터베이스 URL 구성
 # MySQL Connector/Python은 mysql+mysqlconnector 드라이버를 사용합니다.
 DATABASE_URL = (
-    f"mysql+mysqlconnector://{settings.DB_USER}:{settings.DB_PASSWORD}"
+    f"mysql+pymysql://{settings.DB_USER}:{settings.DB_PASSWORD}"
     f"@{settings.DB_HOST}:{settings.DB_PORT}/{settings.DB_NAME}"
 )
 

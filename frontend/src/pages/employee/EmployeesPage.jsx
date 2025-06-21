@@ -21,7 +21,8 @@ export default function EmployeeList() {
   const [total, setTotal] = useState(0);
 
   useEffect(() => {
-    fetch(`/employees?skip=${(page - 1) * limit}&limit=${limit}`)
+    const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:8000';
+    fetch(`${apiUrl}/api/employees?skip=${(page - 1) * limit}&limit=${limit}`)
       .then(res => res.json())
       .then(data => {
         const items = data.items || data;

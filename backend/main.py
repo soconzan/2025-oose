@@ -1,5 +1,6 @@
 from fastapi import FastAPI
 from app.api.main_router import api_router
+from fastapi.routing import APIRoute
 # from app.core.database import Base, engine # ORM 모델을 위한 Base, engine
 from fastapi.middleware.cors import CORSMiddleware
 
@@ -13,13 +14,19 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-app.include_router(api_router)
+app.include_router(api_router, prefix="/api")
 
 # DB 테이블 생성 (개발 단계에서만 사용)
 # 실제 운영 환경에서는 마이그레이션 툴 (Alembic) 사용 권장
-# @app.on_event("startup")
-# def on_startup():
-#     Base.metadata.create_all(bind=engine)
+@app.on_event("startup")
+def on_startup():
+    # Base.metadata.create_all(bind=engine)
+    print("--- Registered Routes ---")
+    for route in app.routes:
+        if isinstance(route, APIRoute):
+            print(f"Path: {route.path}, Name: {route.name}, Methods: {route.methods}")
+    print("-------------------------")
+
 
 # uvicorn main:app --reload 로 실행
 

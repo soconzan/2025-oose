@@ -2,7 +2,7 @@
 
 from pydantic import BaseModel, ConfigDict, Field # Pydantic v2
 from typing import Optional # Python의 Type Hinting (선택적 필드)
-from datetime import datetime # 날짜/시간 타입 (ISO 8601 형식 문자열로 주고받음)
+from datetime import datetime, date # 날짜/시간 타입 (ISO 8601 형식 문자열로 주고받음)
 
 # --- Course (교육 과정) DTOs ---
 
@@ -81,7 +81,7 @@ class CourseResponse(BaseModel):
     courseId: int = Field(..., description="교육 과정 고유 ID")
     courseName: str
     category: str
-    videoId: Optional[int] = None
+    videoId: Optional[int]
     managerId: int
     courseStartDate: datetime
     courseEndDate: datetime
