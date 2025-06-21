@@ -30,10 +30,9 @@ export default function App() {
         <Route path="/schedules/:id" element={<ScheduleDetailPage />} />
         <Route path="/schedules/create" element={<RegisterScdPage />} />
       
-        <Route path="/workspace" element={<WorkroomMain />} />
-        <Route path="/workspace/list" element={<WorkroomList />} />
-        <Route path="/workspace/register" element={<WorkroomRegister />} />
-        <Route path="/workspace/admin" element={<WorkroomAdmin />} />
+       <Route path="/workspaces" element={<WorkroomList />} />
+       <Route path="/workspaces/create" element={<WorkroomRegister />} />
+       <Route path="/workspaces/admin" element={<WorkroomAdmin />} />
       </Routes>
     </BrowserRouter>
   );
