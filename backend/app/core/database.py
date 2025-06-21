@@ -5,6 +5,7 @@ from .config import settings
 
 # 데이터베이스 URL 구성
 # MySQL Connector/Python은 mysql+mysqlconnector 드라이버를 사용합니다.
+
 DATABASE_URL = (
     f"mysql+mysqlconnector://{settings.DB_USER}:{settings.DB_PASSWORD}"
     f"@{settings.DB_HOST}:{settings.DB_PORT}/{settings.DB_NAME}"
@@ -28,3 +29,4 @@ def create_db_tables():
     print("Creating database tables...")
     Base.metadata.create_all(bind=engine)
     print("Database tables created (if not already existing).")
+

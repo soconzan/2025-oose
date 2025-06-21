@@ -1,7 +1,19 @@
+import sys
+import os
+sys.path.append(os.path.dirname(os.path.abspath(__file__)))  # 가장 먼저 추가!
+
+from dotenv import load_dotenv
 from fastapi import FastAPI
 from app.api.main_router import api_router
-# from app.core.database import Base, engine # ORM 모델을 위한 Base, engine
+from app.core.database import Base, engine  # ORM 모델을 위한 Base, engine
 from fastapi.middleware.cors import CORSMiddleware
+
+# .env 파일 로드
+load_dotenv(dotenv_path=".env")
+
+# 환경변수 불러오기
+api_host = os.getenv("API_HOST")
+api_port = os.getenv("API_PORT")
 
 app = FastAPI(title="기획재정부 관리 시스템 API")
 
@@ -16,13 +28,10 @@ app.add_middleware(
 app.include_router(api_router)
 
 # DB 테이블 생성 (개발 단계에서만 사용)
-# 실제 운영 환경에서는 마이그레이션 툴 (Alembic) 사용 권장
-# @app.on_event("startup")
-# def on_startup():
-#     Base.metadata.create_all(bind=engine)
-
-# uvicorn main:app --reload 로 실행
+@app.on_event("startup")
+def on_startup():
+    Base.metadata.create_all(bind=engine)
 
 @app.get("/")
 def root():
-    return {"message" : "FastAPI backend running"}
+    return {"message": "FastAPI backend running"}
