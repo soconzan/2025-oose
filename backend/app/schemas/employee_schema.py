@@ -1,4 +1,4 @@
-from pydantic import BaseModel, EmailStr, Field, ConfigDict
+from pydantic import BaseModel, EmailStr, Field
 from typing import Literal
 
 # Employee DTO
@@ -30,3 +30,7 @@ class EmployeeResponse(BaseModel):
     # class Config:
     #     orm_mode = True
     model_config = ConfigDict(from_attribute=True)
+
+
+class EmployeeResponse:
+    pass

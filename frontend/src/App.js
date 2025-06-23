@@ -26,6 +26,13 @@ import WorkroomAdmin from './pages/workspace/WorkroomAdmin';
 import SchedulePage from './pages/schedule/SchedulePage';
 import ScheduleDetailPage from './pages/schedule/ScheduleDetailPage';
 import RegisterScdPage from './pages/schedule/RegisterScdPage';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import MainPage from './pages/MainPage.jsx';
+import EmployeesPage from './pages/employee/EmployeesPage.jsx';
+import DocumentListPage from './pages/document/DocumentListPage';
+import DocumentCreatePage from './pages/document/DocumentCreatePage';
+import DocumentDetailPage from './pages/document/DocumentDetailPage';
+
 
 function App() {
   return (
@@ -35,7 +42,7 @@ function App() {
         <Routes>
           {/* Main Page */}
           <Route path="/" element={<MainPage />} />
-          
+
           {/* Employee Routes */}
           <Route path="/employees" element={<EmployeePage />} />
           <Route path="/employees/register" element={<RegisterPage />} />
@@ -57,6 +64,16 @@ function App() {
         </Routes>
       </div>
     </Router>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<MainPage />} />
+        <Route path="/employees" element={<EmployeesPage />} />
+
+        <Route path="/documents" element={<DocumentListPage />} />
+        <Route path="/documents/new" element={<DocumentCreatePage />} />
+        <Route path="/documents/:id" element={<DocumentDetailPage />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
