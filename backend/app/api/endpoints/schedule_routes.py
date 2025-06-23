@@ -7,7 +7,7 @@ from ...schemas.schedule_schema import ScheduleCreate, ScheduleResponse  # DTO �
 from ...daos.schedule_dao import ScheduleDAO  # DAO 임포트 (서비스 초기화용)
 from ...services.schedule_service import ScheduleService  # 서비스 임포트
 
-router = APIRouter(prefix="/schedules", tags=["일정 관리"])  # API 경로 접두사 및 태그 설정
+router = APIRouter(tags=["일정 관리"])  # API 경로 접두사 및 태그 설정
 
 # 의존성 주입 헬퍼 함수 (ScheduleService 인스턴스 생성 및 주입)
 def get_schedule_service(db: Session = Depends(get_db_session)) -> ScheduleService:

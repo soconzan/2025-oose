@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { Button } from '@mui/material';
 import { getAllDocuments } from '../../api/documentApi';
-import DocumentList from '../../components/document/DocumentList'; // 컴포넌트 import
+import DocumentList from '../../components/document/DocumentList';
 
 const DocumentListPage = () => {
-  const [documents, setDocuments] = useState([]);
   const navigate = useNavigate();
+  const [documents, setDocuments] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchDocuments = async () => {

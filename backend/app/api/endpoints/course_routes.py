@@ -9,7 +9,7 @@ from ...schemas.course_schema import CourseCreate, CourseResponse # DTO 임포�
 from ...daos.course_dao import CourseDAO # DAO 임포트 (서비스 초기화용)
 from ...services.course_service import CourseService # 서비스 임포트
 
-router = APIRouter(tags=["교육 관리"]) # API 경로 접두사 및 태그 설정
+router = APIRouter(tags=["교육 관리"])
 
 # 의존성 주입 헬퍼 함수 (CourseService 인스턴스 생성 및 주입)
 def get_course_service(db: Session = Depends(get_db_session)) -> CourseService:

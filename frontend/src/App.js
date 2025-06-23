@@ -27,8 +27,10 @@ import SchedulePage from './pages/schedule/SchedulePage';
 import ScheduleDetailPage from './pages/schedule/ScheduleDetailPage';
 import RegisterScdPage from './pages/schedule/RegisterScdPage';
 
+// Document Pages
+import DocumentListPage from './pages/document/DocumentListPage';
 import DocumentCreatePage from './pages/document/DocumentCreatePage';
-import DocumentDetailPage from './pages/document/DocumentListPage';
+import DocumentDetailPage from './pages/document/DocumentDetailPage';
 
 
 function App() {
@@ -58,7 +60,8 @@ function App() {
           <Route path="/workspaces" element={<WorkroomList />} />
           <Route path="/workspaces/create" element={<WorkroomRegister />} />
           <Route path="/workspaces/admin" element={<WorkroomAdmin />} />
-          
+
+          {/* Document Routes */}
           <Route path="/documents" element={<DocumentListPage />} />
           <Route path="/documents/new" element={<DocumentCreatePage />} />
           <Route path="/documents/:id" element={<DocumentDetailPage />} />

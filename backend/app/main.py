@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from app.api.endpoints import employee_routes, schedule_routes, course_routes
+from app.api.main_router import api_router
 from app.core.database import engine, Base
 
 # 데이터베이스 테이블 생성
@@ -12,9 +12,7 @@ app = FastAPI(
 )
 
 # API 라우터 포함
-app.include_router(employee_routes.router, prefix="/api")
-app.include_router(schedule_routes.router, prefix="/api")
-app.include_router(course_routes.router, prefix="/api")
+app.include_router(api_router, prefix="/api")
 
 @app.get("/")
 def read_root():

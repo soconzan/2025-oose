@@ -10,7 +10,6 @@ class EmployeeService:
     # 직원 등록
     def register_employee(self, employee_data: EmployeeCreate) -> Employee:
         new_employee = Employee(**employee_data.model_dump())
-
         created_employee = self.employee_dao.create_employee(new_employee)
         return created_employee
     
@@ -19,7 +18,12 @@ class EmployeeService:
         employees = self.employee_dao.get_employees(skip= skip, limit= limit)
         return employees
     
-    # 상세 조회
-    def get_employee(self, emp_num: int) -> Optional[Employee]:
-        emp = self.employee_dao.get_employee(emp_num)
+    # 상세 조회 (employeeNum)
+    def get_employee_by_num(self, emp_num: int) -> Optional[Employee]:
+        emp = self.employee_dao.get_employee_by_num(emp_num)
+        return emp
+
+    # 상세 조회 (employeeId)
+    def get_employee_by_id(self, employee_id: str) -> Optional[Employee]:
+        emp = self.employee_dao.get_employee_by_id(employee_id)
         return emp
