@@ -1,5 +1,5 @@
 from fastapi import APIRouter
-from app.api.endpoints import employee_routes, course_routes
+from app.api.endpoints import employee_routes
 # from app.api.endpoints import (
 #     employee_routes,
 #     schedule_routes,
@@ -10,5 +10,4 @@ from app.api.endpoints import employee_routes, course_routes
 
 api_router = APIRouter()
 
-api_router.include_router(employee_routes.router, prefix="/employees", tags=["Employees"])
-api_router.include_router(course_routes.router, prefix="/courses", tags=["Courses"])
+api_router.include_router(employee_routes.router, tags=["Employees"])
