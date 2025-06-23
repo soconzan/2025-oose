@@ -30,3 +30,6 @@ class EmployeeDAO:
             (Employee.employeeNum.like(f"%{keyword}%"))
         )
         return query.offset(skip).limit(limit).all()
+    
+    def get_by_employee_num(self, emp_num: int) -> Optional[Employee]:
+        return self.db.query(Employee).filter(Employee.employeeNum == emp_num).first()

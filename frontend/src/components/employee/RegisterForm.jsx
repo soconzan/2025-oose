@@ -54,7 +54,7 @@ export default function RegisterForm({ onCancel, onSubmit }) {
       </div>
       <div className="field">
         <label>사번</label>
-        <input name="employeeNum" value={form.employeeNum} onChange={handleChange} placeholder="2024000000" required />
+        <input name="employeeNum" value={form.employeeNum} onChange={handleChange} placeholder="12345" required />
       </div>
       <div className="field">
         <label>아이디</label>

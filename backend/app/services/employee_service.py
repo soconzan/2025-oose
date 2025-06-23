@@ -26,3 +26,11 @@ class EmployeeService:
     
     def search_employees(self, keyword: str, skip: int = 0, limit: int = 100) -> List[Employee]:
         return self.employee_dao.search_employees(keyword, skip, limit)
+    
+    def register_employee(self, employee_data: EmployeeCreate) -> Employee:
+        if self.employee_dao.get_by_employee_num(employee_data.employeeNum):
+            raise ValueError(f"이미 존재하는 사번입니다: {employee_data.employeeNum}")
+
+        new_employee = Employee(**employee_data.model_dump())
+        created_employee = self.employee_dao.create_employee(new_employee)
+        return created_employee
