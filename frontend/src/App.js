@@ -54,11 +54,11 @@ function App() {
           {/* Schedule Routes */}
           <Route path="/schedules" element={<SchedulePage />} />
           <Route path="/schedules/:id" element={<ScheduleDetailPage />} />
-          <Route path="/schedules/create" element={<RegisterScdPage />} />
+          <Route path="/schedules/register" element={<RegisterScdPage />} />
 
           {/* Workspace Routes */}
           <Route path="/workspaces" element={<WorkroomList />} />
-          <Route path="/workspaces/create" element={<WorkroomRegister />} />
+          <Route path="/workspaces/register" element={<WorkroomRegister />} />
           <Route path="/workspaces/admin" element={<WorkroomAdmin />} />
 
           {/* Document Routes */}

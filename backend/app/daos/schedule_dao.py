@@ -1,18 +1,24 @@
 from sqlalchemy.orm import Session
 from typing import List, Optional
 from app.models.schedule_model import Schedule
+import uuid
+from app.schemas import schedule_schema
 
 
 class ScheduleDAO:
     def __init__(self, db: Session):
         self.db = db
 
-    def create_schedule(self, schedule: Schedule) -> Schedule:
+    def create_schedule(self, schedule: schedule_schema.ScheduleCreate) -> Schedule:
         """새로운 스케줄을 데이터베이스에 추가합니다."""
-        self.db.add(schedule)
+        db_schedule = Schedule(
+            scheduleID=str(uuid.uuid4()),  # UUID로 scheduleID 생성
+            **schedule.model_dump()
+        )
+        self.db.add(db_schedule)
         self.db.commit()
-        self.db.refresh(schedule)
-        return schedule
+        self.db.refresh(db_schedule)
+        return db_schedule
     
     def get_all_schedules(self, skip: int = 0, limit: int = 100) -> List[Schedule]:
         """모든 스케줄을 조회합니다."""

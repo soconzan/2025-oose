@@ -17,7 +17,7 @@ export default function EmployeeDetailPage() {
   const [emp, setEmp] = useState(null);
 
   useEffect(() => {
-    fetch(`/employees/${id}`)
+    fetch(`/api/employees/${id}`)
       .then(res => res.json())
       .then(data => setEmp(data))
       .catch(() => alert('직원 정보를 불러오는데 실패했습니다.'));

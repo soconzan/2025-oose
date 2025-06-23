@@ -8,9 +8,18 @@ function WorkroomList() {
   const [page, setPage] = useState(1);
 
   useEffect(() => {
-    fetch('http://localhost:8000/api/workrooms')
-      .then(res => res.json())
-      .then(data => setWorkrooms(Array.isArray(data) ? data : []));
+    fetch('http://localhost:8000/api/workrooms/')
+      .then(res => {
+        if (!res.ok) {
+          throw new Error(`HTTP error! status: ${res.status}`);
+        }
+        return res.json();
+      })
+      .then(data => setWorkrooms(Array.isArray(data) ? data : []))
+      .catch(error => {
+        console.error("업무방 목록을 가져오는 중 에러 발생:", error);
+        setWorkrooms([]);
+      });
   }, []);
 
   // 필터링된 데이터

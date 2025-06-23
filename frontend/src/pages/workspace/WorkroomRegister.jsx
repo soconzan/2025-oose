@@ -20,9 +20,12 @@ function WorkroomRegister() {
 
   // 직원 전체 목록 불러오기
   useEffect(() => {
-    fetch('http://localhost:8000/employees')
+    fetch('http://localhost:8000/api/employees')
       .then(res => res.json())
-      .then(data => setEmployeeList(data))
+      .then(data => {
+        const list = Array.isArray(data) ? data : (data.items || []);
+        setEmployeeList(list);
+      })
       .catch(() => setEmployeeList([]));
   }, []);
 
@@ -87,13 +90,13 @@ function WorkroomRegister() {
 
     // 등록 요청
     try {
-      const res = await fetch('http://localhost:8000/workrooms', {
+      const res = await fetch('http://localhost:8000/api/workrooms', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           ...form,
           assignee: assigneeName,
-          assigneeNum: assigneeNum
+          assigneeNum: parseInt(assigneeNum, 10)
         }),
       });
       if (res.ok) {

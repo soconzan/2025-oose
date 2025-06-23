@@ -2,6 +2,7 @@ import React, { useState, useEffect, useMemo } from 'react'; // useMemo 추가
 import { useNavigate } from 'react-router-dom';
 import '../../components/schedule/Schedule.css';
 import ScheduleRegister from '../../components/schedule/ScheduleRegister';
+import { createSchedule } from '../../api/scheduleApi'; // createSchedule import
 
 const SHARE_SCOPE_MAP = {
   0: '전체',
@@ -29,20 +30,18 @@ export default function SchedulePage() {
   const [viewMode, setViewMode] = useState('list');
   const [currentDate, setCurrentDate] = useState(new Date());
 
-  useEffect(() => {
-    // [수정] 필터링이 서버사이드에서 이루어지지 않으므로, 모든 데이터를 가져오거나
-    // 필터링도 페이지네이션과 함께 API 요청으로 처리해야 합니다.
-    // 여기서는 클라이언트사이드 필터링을 유지하되, 모든 데이터를 가져오는 것으로 가정합니다.
-    // 만약 데이터가 너무 많다면, 필터링 로직을 API 요청에 포함시켜야 합니다.
-    // 예: fetch(`/schedules?skip=...&limit=...&shareScope=${filters.shareScope}`)
+  const fetchSchedules = () => {
     fetch(`/api/schedules?skip=${(page - 1) * limit}&limit=${limit}`)
       .then(res => res.json())
       .then(data => {
         const items = data.items || data;
-        // [수정] 데이터가 배열인지 확인하여 안정성 추가
         setSchedules(Array.isArray(items) ? items : []);
         setTotal(data.totalCount || (Array.isArray(items) ? items.length : 0));
       });
+  };
+
+  useEffect(() => {
+    fetchSchedules();
   }, [page]);
 
   useEffect(() => {
@@ -178,6 +177,26 @@ export default function SchedulePage() {
     return date.toLocaleString();
   };
 
+  const handleSubmit = async (formData) => {
+    try {
+      await createSchedule(formData);
+      setShowRegister(false); // 폼 닫기
+      fetchSchedules(); // 목록 새로고침
+      alert('일정이 성공적으로 등록되었습니다.');
+    } catch (err) {
+      console.error("등록 에러 상세:", err);
+      // 기존 에러 처리 로직
+      if (Array.isArray(err.detail)) {
+        const messages = err.detail.map((e) => `${e.loc.slice(-1)[0]}: ${e.msg}`).join("\n");
+        alert(messages);
+      } else if (typeof err.detail === "string") {
+        alert(err.detail);
+      } else {
+        alert("알 수 없는 오류가 발생했습니다.");
+      }
+    }
+  };
+
   return (
     <div className="schedule-list-container">
       <h2>일정 조회</h2>
@@ -247,23 +266,8 @@ export default function SchedulePage() {
 
       {showRegister && (
         <ScheduleRegister
-          onClose={() => setShowRegister(false)}
-          onSuccess={() => {
-            setShowRegister(false);
-            // [수정] 새 일정이 등록되면 데이터를 다시 불러오도록 페이지를 1로 리셋
-            // 또는 현재 페이지를 다시 불러오는 로직을 추가할 수 있습니다.
-            if (page === 1) {
-              fetch(`/schedules?skip=0&limit=${limit}`)
-                .then(res => res.json())
-                .then(data => {
-                  const items = data.items || data;
-                  setSchedules(Array.isArray(items) ? items : []);
-                  setTotal(data.totalCount || (Array.isArray(items) ? items.length : 0));
-                });
-            } else {
-              setPage(1);
-            }
-          }}
+          onSubmit={handleSubmit}
+          onCancel={() => setShowRegister(false)}
         />
       )}
     </div>

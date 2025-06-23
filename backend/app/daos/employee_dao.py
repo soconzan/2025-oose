@@ -21,8 +21,15 @@ class EmployeeDAO:
     def get_employees(self, skip: int = 0, limit: int = 100) -> List[Employee]:
         return self.db.query(Employee).offset(skip).limit(limit).all()
 
-    def get_employee_by_num(self, emp_num: int) -> Optional[Employee]:
+    def get_employee(self, emp_num: int) -> Optional[Employee]:
         return self.db.query(Employee).filter(Employee.employeeNum == emp_num).first()
-
-    def get_employee_by_id(self, employee_id: str) -> Optional[Employee]:
-        return self.db.query(Employee).filter(Employee.employeeId == employee_id).first()
+    
+    def search_employees(self, keyword: str, skip: int = 0, limit: int = 100) -> List[Employee]:
+        query = self.db.query(Employee).filter(
+            (Employee.name.like(f"%{keyword}%")) |
+            (Employee.employeeNum.like(f"%{keyword}%"))
+        )
+        return query.offset(skip).limit(limit).all()
+    
+    def get_by_employee_num(self, emp_num: int) -> Optional[Employee]:
+        return self.db.query(Employee).filter(Employee.employeeNum == emp_num).first()

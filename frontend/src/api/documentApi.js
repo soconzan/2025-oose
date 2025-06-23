@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { v4 as uuidv4 } from 'uuid';
 
 // 다른 api 파일과 동일하게 baseURL 설정
 const apiClient = axios.create({

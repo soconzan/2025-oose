@@ -6,6 +6,7 @@ class WorkroomBase(BaseModel):
     workTitle: str = Field(..., alias="workTitle")
     category: Optional[str] = None
     assignee: str
+    assigneeNum: int = Field(..., description="담당자 직원번호")
     workContent: str = Field(..., alias="workContent")
     isPublic: bool = Field(..., alias="isPublic")
     startDate: date = Field(..., alias="startDate")
@@ -23,6 +24,7 @@ class WorkroomUpdate(BaseModel):
     workTitle: Optional[str] = Field(None, alias="workTitle")
     category: Optional[str] = None
     assignee: Optional[str] = None
+    assigneeNum: Optional[int] = Field(None, description="담당자 직원번호")
     workContent: Optional[str] = Field(None, alias="workContent")
     isPublic: Optional[bool] = Field(None, alias="isPublic")
     startDate: Optional[date] = Field(None, alias="startDate")

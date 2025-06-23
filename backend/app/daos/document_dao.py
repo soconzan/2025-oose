@@ -4,18 +4,19 @@ from sqlalchemy.orm import Session
 from typing import List, Optional
 from app.models.document_model import Document
 from app.schemas.document_schema import DocumentCreate, DocumentUpdate
+import uuid
 
 
 class DocumentDAO:
     # __init__ 메소드를 제거하고 각 메소드에서 db 세션을 받도록 수정
 
-    def create_document(self, db: Session, *, doc_in: DocumentCreate) -> Document:
-        # doc_in.dict() -> doc_in.model_dump()로 변경
-        db_obj = Document(**doc_in.model_dump())
-        db.add(db_obj)
+    def create_document(self, db: Session, doc_in: DocumentCreate) -> Document:
+        db_doc = Document(**doc_in.model_dump())
+        db_doc.documentID = str(uuid.uuid4())
+        db.add(db_doc)
         db.commit()
-        db.refresh(db_obj)
-        return db_obj
+        db.refresh(db_doc)
+        return db_doc
 
     def get_document(self, db: Session, document_id: int) -> Optional[Document]:
         # PK가 Integer 타입으로 변경되었으므로 document_id 타입도 int로 변경

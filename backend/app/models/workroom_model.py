@@ -7,6 +7,7 @@ class Workroom(Base):
     workTitle = Column(String(30), nullable=False)
     category = Column(String(20), nullable=True)
     assignee = Column(String(20), nullable=False)
+    assigneeNum = Column(Integer, nullable=False)
     workContent = Column(String(200), nullable=False)
     isPublic = Column(Boolean, nullable=False, default=True)
     startDate = Column(Date, nullable=False)

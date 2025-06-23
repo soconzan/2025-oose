@@ -16,12 +16,12 @@ export default function ScheduleRegister({ onCancel, onSubmit }) {
   ];
 
   const [form, setForm] = useState({
-    scheduleName: '',
+    description: '',
     startDate: '',
     endDate: '',
-    shareScope: '',
-    alarmStartTime: '',
-    alarmTarget: ''
+    sharingScope: '',
+    smsAlertTime: '',
+    smsAlertTarget: ''
   });
 
   const handleChange = e => {
@@ -32,12 +32,12 @@ export default function ScheduleRegister({ onCancel, onSubmit }) {
   const handleSubmit = e => {
     e.preventDefault();
     onSubmit({
-      scheduleName: form.scheduleName,
+      description: form.description,
       startDate: form.startDate,
       endDate: form.endDate,
-      shareScope: form.shareScope,
-      alarmStartTime: form.alarmStartTime,
-      alarmTarget: form.alarmTarget
+      sharingScope: parseInt(form.sharingScope, 10),
+      smsAlertTime: form.smsAlertTime ? `${form.startDate.split('T')[0]}T${form.smsAlertTime}:00` : null,
+      smsAlertTarget: parseInt(form.smsAlertTarget, 10)
     });
   };
 
@@ -48,8 +48,8 @@ return (
         <div className="field">
             <label>일정 내용</label>
             <input 
-                name="scheduleName" 
-                value={form.scheduleName} 
+                name="description" 
+                value={form.description} 
                 onChange={handleChange} 
                 placeholder="일정 내용" 
                 required 
@@ -78,8 +78,8 @@ return (
         <div className="field">
             <label>공유 범위</label>
             <select
-                name="shareScope" 
-                value={form.shareScope} 
+                name="sharingScope" 
+                value={form.sharingScope} 
                 onChange={handleChange} 
                 placeholder="공유 범위" 
                 required 
@@ -94,8 +94,8 @@ return (
         <div className="field">
             <label>알림 대상</label>
             <select
-                name="alarmTarget" 
-                value={form.alarmTarget} 
+                name="smsAlertTarget" 
+                value={form.smsAlertTarget} 
                 onChange={handleChange} 
                 placeholder="알림 대상" 
                 required>
@@ -109,19 +109,19 @@ return (
         <div className="field">
             <label>알림 시간</label>
             <input 
-                name="alarmStartTime" 
+                name="smsAlertTime" 
                 type="time"
-                value={form.alarmStartTime} 
+                value={form.smsAlertTime} 
                 onChange={handleChange} 
                 placeholder="알림 시간" 
-                disabled={form.alarmTarget === "0" || form.alarmTarget === 0}
-                required={form.alarmTarget !== "0" && form.alarmTarget !== 0}
+                disabled={form.smsAlertTarget === "0" || form.smsAlertTarget === 0}
+                required={form.smsAlertTarget !== "0" && form.smsAlertTarget !== 0}
             />
         </div>
 
         <div className="buttons">
             <button type="button" className="cancel" onClick={onCancel}>취소</button>
-            <button type="submit" className="submit" onClick={onSubmit}>등록</button>
+            <button type="submit" className="submit">등록</button>
         </div>
     </form>
 );

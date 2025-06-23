@@ -14,9 +14,9 @@ const DocumentForm = ({ onSubmit }) => {
       alert('제목, 카테고리, 내용을 모두 입력해주세요.');
       return;
     }
-    // author_id는 실제 로그인된 사용자 ID로 설정해야 합니다.
-    // 지금은 임시로 1번 사용자로 하드코딩합니다.
-    const documentData = { title, category, content, author_id: 1 };
+    // authorEmployeeId는 실제 로그인된 사용자 ID로 설정해야 합니다.
+    // 지금은 임시로 'MOEF-ADM001' 사용자로 하드코딩합니다.
+    const documentData = { title, category, content, authorEmployeeId: 'MOEF-ADM001' };
     onSubmit(documentData);
   };
 
