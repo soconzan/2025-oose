@@ -1,25 +1,19 @@
 from sqlalchemy import Column, Integer, String, Text, DateTime, func, ForeignKey
 from sqlalchemy.orm import relationship
 from ..core.database import Base
-
+import datetime
 
 class Document(Base):
     __tablename__ = 'documents'
 
-    # id를 Integer 타입의 기본 키로 변경
-    id = Column(Integer, primary_key=True, index=True)
-
-    # 컬럼명을 snake_case로 변경
-    title = Column(String(200), nullable=False)
+    documentID = Column(String(50), primary_key=True, index=True)
+    title = Column(String(255), nullable=False)
     category = Column(String(100), nullable=False)
-    content = Column(Text, nullable=False)
-    file_url = Column(String(255), nullable=True)  # fileUrl -> file_url
+    content = Column(Text, nullable=True)
+    filePath = Column(String(255), nullable=True)
 
-    created_date = Column(DateTime(timezone=True), server_default=func.now(), nullable=False)
-    updated_date = Column(DateTime(timezone=True), server_default=func.now(), onupdate=func.now(), nullable=False)
+    createdDate = Column(DateTime, server_default=func.now(), nullable=False)
+    updatedDate = Column(DateTime, nullable=True)
 
-    # Employee 모델과 연결하기 위한 외래 키 추가
-    author_id = Column(Integer, ForeignKey('employees.id'))
-
-    # Employee 모델과의 관계 설정
-    author = relationship("Employee")
+    authorEmployeeId = Column(String(50), ForeignKey('employees.employeeId'))
+    author = relationship("Employee", back_populates="documents")

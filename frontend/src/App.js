@@ -26,9 +26,8 @@ import WorkroomAdmin from './pages/workspace/WorkroomAdmin';
 import SchedulePage from './pages/schedule/SchedulePage';
 import ScheduleDetailPage from './pages/schedule/ScheduleDetailPage';
 import RegisterScdPage from './pages/schedule/RegisterScdPage';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import MainPage from './pages/MainPage.jsx';
-import EmployeesPage from './pages/employee/EmployeesPage.jsx';
+
+// Document Pages
 import DocumentListPage from './pages/document/DocumentListPage';
 import DocumentCreatePage from './pages/document/DocumentCreatePage';
 import DocumentDetailPage from './pages/document/DocumentDetailPage';
@@ -61,19 +60,14 @@ function App() {
           <Route path="/workspaces" element={<WorkroomList />} />
           <Route path="/workspaces/create" element={<WorkroomRegister />} />
           <Route path="/workspaces/admin" element={<WorkroomAdmin />} />
+
+          {/* Document Routes */}
+          <Route path="/documents" element={<DocumentListPage />} />
+          <Route path="/documents/new" element={<DocumentCreatePage />} />
+          <Route path="/documents/:id" element={<DocumentDetailPage />} />
         </Routes>
       </div>
     </Router>
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<MainPage />} />
-        <Route path="/employees" element={<EmployeesPage />} />
-
-        <Route path="/documents" element={<DocumentListPage />} />
-        <Route path="/documents/new" element={<DocumentCreatePage />} />
-        <Route path="/documents/:id" element={<DocumentDetailPage />} />
-      </Routes>
-    </BrowserRouter>
   );
 }
 

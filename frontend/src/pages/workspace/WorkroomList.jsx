@@ -8,9 +8,9 @@ function WorkroomList() {
   const [page, setPage] = useState(1);
 
   useEffect(() => {
-    fetch('http://localhost:8000/workrooms')
+    fetch('http://localhost:8000/api/workrooms')
       .then(res => res.json())
-      .then(data => setWorkrooms(data));
+      .then(data => setWorkrooms(Array.isArray(data) ? data : []));
   }, []);
 
   // 필터링된 데이터

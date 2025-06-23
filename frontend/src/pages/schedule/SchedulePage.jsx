@@ -35,7 +35,7 @@ export default function SchedulePage() {
     // 여기서는 클라이언트사이드 필터링을 유지하되, 모든 데이터를 가져오는 것으로 가정합니다.
     // 만약 데이터가 너무 많다면, 필터링 로직을 API 요청에 포함시켜야 합니다.
     // 예: fetch(`/schedules?skip=...&limit=...&shareScope=${filters.shareScope}`)
-    fetch(`/schedules?skip=${(page - 1) * limit}&limit=${limit}`)
+    fetch(`/api/schedules?skip=${(page - 1) * limit}&limit=${limit}`)
       .then(res => res.json())
       .then(data => {
         const items = data.items || data;
@@ -55,8 +55,8 @@ export default function SchedulePage() {
     }
     if (filters.keyword) {
       temp = temp.filter(s =>
-        (s.title && s.title.includes(filters.keyword)) ||
-        (s.scheduleId && s.scheduleId.toString().includes(filters.keyword))
+        (s.description && s.description.includes(filters.keyword)) ||
+        (s.scheduleID && s.scheduleID.toString().includes(filters.keyword))
       );
     }
     setFiltered(temp);
@@ -67,9 +67,9 @@ export default function SchedulePage() {
     const groups = {};
     filtered.forEach(schedule => {
       // [수정] startTime이 유효한지 먼저 확인
-      if (!schedule.startTime) return;
+      if (!schedule.startDate) return;
       
-      const scheduleDate = new Date(schedule.startTime);
+      const scheduleDate = new Date(schedule.startDate);
       // [수정] 날짜 객체가 유효한지 확인
       if (isNaN(scheduleDate.getTime())) return;
 
@@ -117,8 +117,8 @@ export default function SchedulePage() {
           {daySchedules.length > 0 && (
             <div className="schedule-indicator">
               {daySchedules.slice(0, 2).map(schedule => (
-                <div key={schedule.scheduleId} className="schedule-item">
-                  {schedule.title}
+                <div key={schedule.scheduleID} className="schedule-item">
+                  {schedule.description}
                 </div>
               ))}
               {daySchedules.length > 2 && (
@@ -160,8 +160,8 @@ export default function SchedulePage() {
           <div key={day} className="date-group">
             <h4 className="date-header">{currentDate.getMonth() + 1}월 {day}일</h4>
             {monthlySchedules[day].map(schedule => (
-              <div key={schedule.scheduleId} className="schedule-list-item">
-                <div className="schedule-title">{schedule.title}</div>
+              <div key={schedule.scheduleID} className="schedule-list-item">
+                <div className="schedule-title">{schedule.description}</div>
               </div>
             ))}
           </div>
@@ -225,12 +225,12 @@ export default function SchedulePage() {
             </thead>
             <tbody>
               {filtered.map(schedule => (
-                <tr key={schedule.scheduleId} onClick={() => navigate(`/schedules/${schedule.scheduleId}`)}>
-                  <td>{schedule.scheduleId}</td>
-                  <td>{schedule.title}</td>
+                <tr key={schedule.scheduleID} onClick={() => navigate(`/schedules/${schedule.scheduleID}`)}>
+                  <td>{schedule.scheduleID}</td>
+                  <td>{schedule.description}</td>
                   {/* [수정] 안전한 날짜 포매팅 함수 사용 */}
-                  <td>{formatDateTime(schedule.startTime)}</td>
-                  <td>{formatDateTime(schedule.endTime)}</td>
+                  <td>{formatDateTime(schedule.startDate)}</td>
+                  <td>{formatDateTime(schedule.endDate)}</td>
                   <td>{SHARE_SCOPE_MAP[schedule.shareScope] || schedule.shareScope}</td>
                   <td>{ALARM_TARGET_MAP[schedule.alarmTarget] || schedule.alarmTarget}</td>
                 </tr>

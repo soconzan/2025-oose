@@ -23,12 +23,23 @@ export default function EmployeeList() {
   useEffect(() => {
     const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:8000';
     fetch(`${apiUrl}/api/employees?skip=${(page - 1) * limit}&limit=${limit}`)
-      .then(res => res.json())
+      .then(res => {
+        if (!res.ok) {
+          throw new Error(`API 요청 실패: ${res.status}`);
+        }
+        return res.json();
+      })
       .then(data => {
         const items = data.items || data;
         setEmployees(items);
         setFiltered(items);
-        setTotal(data.totalCount || items.length);
+        setTotal(data.total || items.length);
+      })
+      .catch(error => {
+        console.error('API 호출 중 오류:', error);
+        setEmployees([]);
+        setFiltered([]);
+        setTotal(0);
       });
   }, [page]);
 

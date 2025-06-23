@@ -3,7 +3,7 @@ from typing import Optional # Python의 Type Hinting (선택적 필드)
 from datetime import datetime # 날짜/시간 타입 (ISO 8601 형식 문자열로 주고받음)
 
 class ScheduleCreate(BaseModel):
-    scheduleId: str = Field(..., max_length=255, description="스케줄 ID")
+    scheduleID: str = Field(..., max_length=255, description="스케줄 ID")
     description: str = Field(..., max_length=100, description="스케줄 내용")
     startDate: datetime = Field(..., description="시작 일시 (예: '2025-07-20T09:00:00')")
     endDate: datetime = Field(..., description="종료 일시")
@@ -14,7 +14,7 @@ class ScheduleCreate(BaseModel):
     model_config = ConfigDict(
         json_schema_extra={
             "example": {
-                "scheduleId": "schd-001",
+                "scheduleID": "schd-001",
                 "description": "기획재정부 재정 분석 실무 교육",
                 "startDate": "2025-08-01T09:00:00",
                 "endDate": "2025-08-05T18:00:00",
@@ -26,7 +26,7 @@ class ScheduleCreate(BaseModel):
     )
 
 class ScheduleUpdate(BaseModel):
-    scheduleId: Optional[str] = Field(None, max_length=255, description="스케줄 ID")
+    scheduleID: Optional[str] = Field(None, max_length=255, description="스케줄 ID")
     description: Optional[str] = Field(None, max_length=100, description="스케줄 내용")
     startDate: Optional[datetime] = Field(None, description="시작 일시")
     endDate: Optional[datetime] = Field(None, description="종료 일시")
@@ -37,7 +37,7 @@ class ScheduleUpdate(BaseModel):
     model_config = ConfigDict(
         json_schema_extra={
             "example": {
-                "scheduleId": "schd-001",
+                "scheduleID": "schd-001",
                 "description": "기획재정부 재정 분석 실무 교육 - 업데이트",
                 "startDate": "2025-08-01T09:00:00",
                 "endDate": "2025-08-05T18:00:00",
@@ -49,7 +49,7 @@ class ScheduleUpdate(BaseModel):
     )
 
 class ScheduleResponse(BaseModel):
-    scheduleId: str = Field(..., max_length=255, description="스케줄 ID")
+    scheduleID: str = Field(..., max_length=255, description="스케줄 ID")
     description: str = Field(..., max_length=100, description="스케줄 내용")
     startDate: datetime = Field(..., description="시작 일시 (예: '2025-07-20T09:00:00')")
     endDate: datetime = Field(..., description="종료 일시")
