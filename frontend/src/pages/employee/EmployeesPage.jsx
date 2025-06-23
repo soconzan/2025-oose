@@ -44,6 +44,26 @@ export default function EmployeeList() {
     setFiltered(temp);
   }, [filters, employees]);
 
+  useEffect(() => {
+  const params = new URLSearchParams({
+    skip: (page - 1) * limit,
+    limit: limit,
+  });
+  if (filters.keyword) {
+    params.append('keyword', filters.keyword);
+  }
+
+  fetch(`/employees?${params.toString()}`)
+    .then(res => res.json())
+    .then(data => {
+      const items = data.items || data;
+      setEmployees(items);
+      setFiltered(items);
+      setTotal(data.totalCount || items.length);
+    });
+  }, [page, filters.keyword]); // keyword 변경 시 API 호출
+
+
   const totalPages = Math.ceil(total / limit);
 
   return (

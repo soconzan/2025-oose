@@ -1,6 +1,7 @@
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
 from typing import List
+from typing import Optional
 
 from ...core.dependencies import get_db_session # DB 세션 의존성 주입
 from ...schemas.employee_schema import EmployeeCreate, EmployeeResponse
@@ -55,3 +56,13 @@ def read_employee(id: int,
     if not emp:
         raise HTTPException(status_code=404, detail=f"Employee not found : {id}")
     return emp
+
+@router.get("/", response_model=List[EmployeeResponse])
+def read_employees(skip: int = 0, limit: int = 100, keyword: Optional[str] = None,
+                   employee_service: EmployeeService = Depends(get_employee_service)):
+    """
+    직원 목록 조회 (검색 포함)
+    """
+    if keyword:
+        return employee_service.search_employees(keyword=keyword, skip=skip, limit=limit)
+    return employee_service.get_employee_list(skip=skip, limit=limit)

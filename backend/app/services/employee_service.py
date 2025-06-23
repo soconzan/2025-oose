@@ -23,3 +23,6 @@ class EmployeeService:
     def get_employee(self, emp_num: int) -> Optional[Employee]:
         emp = self.employee_dao.get_employee(emp_num)
         return emp
+    
+    def search_employees(self, keyword: str, skip: int = 0, limit: int = 100) -> List[Employee]:
+        return self.employee_dao.search_employees(keyword, skip, limit)
